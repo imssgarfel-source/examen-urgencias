@@ -2,608 +2,369 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Parcial: Asma Bronquial y Crisis Asmática</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Examen Integrador de Urgencias Médicas - TSUM y Enfermería</title>
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-light: #3b82f6;
-            --secondary: #0f766e;
-            --background: #f8fafc;
-            --surface: #ffffff;
-            --text: #0f172a;
-            --text-muted: #475569;
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --accent: #2c7a7b;
+            --success: #2f855a;
+            --success-bg: #f0fff4;
+            --error: #c53030;
+            --error-bg: #fff5f5;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
             --border: #e2e8f0;
-            --correct: #16a34a;
-            --correct-bg: #f0fdf4;
-            --incorrect: #dc2626;
-            --incorrect-bg: #fef2f2;
-            --radius: 8px;
         }
 
-        * {
-            box-sizing: border-box;
+        /* NÚCLEO INMUTABLE 1: BLINDAJE TÁCTIL Y ANTI-SELECCIÓN */
+        html, body {
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            overscroll-behavior-y: none;
+            -webkit-overflow-scrolling: touch;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.5;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            background: var(--surface);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--border);
+            padding-bottom: 20px;
+            overflow-y: auto;
         }
 
         header {
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .stats-bar {
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--background);
-            padding: 12px 20px;
-            border-radius: var(--radius);
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .header-title h1 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .header-title p {
+            font-size: 0.7rem;
+            opacity: 0.85;
+            margin: 0;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stat-badge.correct-badge { background: rgba(47, 133, 90, 0.4); }
+        .stat-badge.error-badge { background: rgba(197, 48, 48, 0.4); }
+
+        .container {
+            max-width: 900px;
+            margin: 10px auto;
+            padding: 0 8px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
-            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .timer-box {
+        #registration-screen, #blocked-screen {
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
-        .progress-container {
+        .form-group input, .form-group select {
             width: 100%;
-            background-color: #e2e8f0;
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            overflow: hidden;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            -webkit-user-select: text;
+            user-select: text;
+            box-sizing: border-box;
         }
 
-        .progress-bar {
-            height: 100%;
-            background-color: var(--primary-light);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .question-card {
-            margin-bottom: 25px;
-        }
-
-        .question-text {
-            font-size: 1.1rem;
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 18px;
-            color: var(--text);
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) { background: var(--primary-light); }
+        .btn:disabled { background: #a0aec0; cursor: not-allowed; }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .q-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .q-tag.toxicologia { background: #fed7d7; color: #9b2c2c; }
+        .q-tag.otorrino { background: #feebc8; color: #7b341e; }
+        .q-tag.oftalmo { background: #ebf8ff; color: #2b6cb0; }
+
+        .q-module {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .q-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a202c;
+            line-height: 1.4;
         }
 
         .options-list {
-            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 6px;
         }
 
         .option-btn {
-            width: 100%;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 10px;
             text-align: left;
-            padding: 14px 18px;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
+            font-size: 0.82rem;
             cursor: pointer;
-            font-size: 0.98rem;
-            transition: all 0.2s ease;
-            color: var(--text);
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            line-height: 1.3;
         }
 
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--primary-light);
-            background-color: #eff6ff;
-        }
-
-        .option-btn:disabled {
-            cursor: default;
-        }
+        .option-btn:hover:not(:disabled) { background: #edf2f7; border-color: #cbd5e0; }
+        .option-btn:disabled { cursor: default; }
 
         .option-btn.correct {
-            border-color: var(--correct);
-            background-color: var(--correct-bg);
-            color: #14532d;
+            background: var(--success-bg) !important;
+            border-color: var(--success) !important;
+            color: var(--success) !important;
             font-weight: 600;
         }
 
         .option-btn.incorrect {
-            border-color: var(--incorrect);
-            background-color: var(--incorrect-bg);
-            color: #7f1d1d;
+            background: var(--error-bg) !important;
+            border-color: var(--error) !important;
+            color: var(--error) !important;
         }
 
         .feedback-box {
-            margin-top: 20px;
-            padding: 16px;
-            border-radius: var(--radius);
-            font-size: 0.95rem;
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
             display: none;
+            animation: fadeIn 0.3s ease-in;
+            line-height: 1.35;
         }
 
-        .feedback-box.correct {
-            display: block;
-            background-color: var(--correct-bg);
-            border: 1px solid var(--correct);
-            color: #14532d;
-        }
+        .feedback-box.show { display: block; }
+        .feedback-box.correct-fb { background: var(--success-bg); border-left: 4px solid var(--success); color: #22543d; }
+        .feedback-box.incorrect-fb { background: var(--error-bg); border-left: 4px solid var(--error); color: #742a2a; }
 
-        .feedback-box.incorrect {
-            display: block;
-            background-color: var(--incorrect-bg);
-            border: 1px solid var(--incorrect);
-            color: #7f1d1d;
-        }
+        .feedback-title { font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
 
-        .nav-controls {
+        .top-nav-bar {
             display: flex;
-            justify-content: flex-end;
-            margin-top: 25px;
-        }
-
-        .btn-next {
-            padding: 12px 24px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-next:hover {
-            background-color: var(--primary-light);
-        }
-
-        .btn-next:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        .results-screen {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .score-circle {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin: 20px auto;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
 
-        .score-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            line-height: 1;
+        .score-summary { text-align: center; padding: 10px 0; }
+        .score-circle {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            margin: 0 auto 10px;
         }
+        .score-val { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+        .score-max { font-size: 0.7rem; opacity: 0.8; }
 
-        .score-label {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
+        .module-breakdown { margin-top: 15px; }
+        .module-item { margin-bottom: 8px; }
+        .module-info { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px; font-weight: 600; }
+        .progress-bar { height: 5px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.5s ease-out; }
 
-        .restart-btn {
-            margin-top: 25px;
-            padding: 12px 28px;
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-weight: 600;
-            cursor: pointer;
-        }
+        .hidden { display: none !important; }
 
-        .restart-btn:hover {
-            opacity: 0.9;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-3px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Examen Parcial Interactivo: Asma Bronquial y Crisis Asmática</h1>
-        <p class="subtitle">Nivel Superior — Licenciatura en Enfermería y TSUM / Atención Prehospitalaria Avanzada</p>
-    </header>
-
-    <div id="quiz-screen">
-        <div class="stats-bar">
-            <span>Pregunta <span id="current-question-num">1</span> de <span id="total-questions-num">15</span></span>
-            <div class="timer-box">⏱️ <span id="timer-display">10:50</span></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-
-        <div class="question-card">
-            <div class="question-text" id="question-text">Cargando pregunta...</div>
-            <ul class="options-list" id="options-container"></ul>
-            <div class="feedback-box" id="feedback-box"></div>
-        </div>
-
-        <div class="nav-controls">
-            <button class="btn-next" id="next-btn" onclick="nextQuestion()" disabled>Siguiente Pregunta</button>
+    <!-- NÚCLEO INMUTABLE 2: BLOQUEO POR DISPOSITIVO (LOCALSTORAGE) -->
+    <div id="blocked-screen" class="container hidden">
+        <div class="card" style="text-align: center; padding: 20px;">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">⚠️</div>
+            <h2 style="color: var(--error); margin-bottom: 8px; font-size: 1.1rem;">Evaluación Ya Registrada</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">
+                En este dispositivo ya se ha realizado un examen previo. El sistema bloquea nuevos intentos automáticos para garantizar la integridad académica.
+            </p>
+            <button class="btn" style="background: var(--primary);" onclick="requestUnlock()">Desbloquear con Clave Docente</button>
         </div>
     </div>
 
-    <div id="results-screen" class="results-screen" style="display: none;">
-        <h2>Evaluación Finalizada</h2>
-        <p class="subtitle">Resumen de rendimiento clínico y prehospitalario</p>
+    <!-- Registration Screen -->
+    <div id="registration-screen" class="container">
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 4px; text-align: center; font-size: 1.1rem;">Examen Integrador de Urgencias Médicas</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Toxicología | Otorrinolaringología | Oftalmología</p>
+            
+            <form id="reg-form" onsubmit="startExam(event)">
+                <div class="form-group">
+                    <label for="student-name">Nombre Completo del Alumno:</label>
+                    <input type="text" id="student-name" required placeholder="Ej. Juan Carlos García Santiago">
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-career">Carrera / Programa Académico:</label>
+                    <select id="student-career" required>
+                        <option value="">Seleccione una opción...</option>
+                        <option value="Técnico Superior en Urgencias Médicas (TSUM)">Técnico Superior en Urgencias Médicas (TSUM)</option>
+                        <option value="Licenciatura en Enfermería">Licenciatura en Enfermería</option>
+                    </select>
+                </div>
 
-        <div class="score-circle">
-            <span class="score-number" id="final-score">0.0</span>
-            <span class="score-label">Escala 0 - 10</span>
+                <button type="submit" class="btn">Iniciar Examen</button>
+            </form>
         </div>
-
-        <p id="score-message" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;"></p>
-        <p id="score-details" style="color: var(--text-muted);"></p>
-
-        <button class="restart-btn" onclick="restartQuiz()">Reintentar Examen (Nueva Muestra Aleatoria)</button>
     </div>
-</div>
 
-<script>
-    const fullQuestionBank = [
-        {
-            question: "¿Cuál es la tríada fisiopatológica clásica que caracteriza al asma bronquial durante una crisis aguda?",
-            options: [
-                "Broncospasmo, edema de la mucosa bronquial e hipersecreción de moco espeso",
-                "Destrucción alveolar, colapso de vías aéreas pequeñas e hipertensión pulmonar",
-                "Vasodilatación masiva, exudado fibrinoso alveolar y neumotórax espontáneo",
-                "Fibrosis intersticial, parálisis ciliar e hipertrofia del ventrículo derecho"
-            ],
-            correct: 0,
-            justification: "El asma se define como una enfermedad inflamatoria crónica caracterizada por broncospasmo (contracción del músculo liso), edema de la mucosa e hipersecreción de moco."
-        },
-        {
-            question: "En la evaluación inicial (ABCDE) de un paciente con crisis asmática, ¿cuál de los siguientes hallazgos al examen físico indica gravedad extrema o falla respiratoria inminente?",
-            options: [
-                "Tórax silencioso a la auscultación y alteración del estado de conciencia",
-                "Presencia de sibilancias audibles en ambas fases de la respiración",
-                "Frecuencia respiratoria de 26 respiraciones por minuto con Taquicardia de 105 bpm",
-                "Habla en frases completas con leve tiraje intercostal"
-            ],
-            correct: 0,
-            justification: "El 'tórax silencioso' refleja la falta casi total de flujo aéreo debido a una broncoconsustricción crítica y taponamiento de moco, lo que junto a la alteración mental anticipa un paro respiratorio."
-        },
-        {
-            question: "¿Cuál es la dosis y vía de administración recomendada de Salbutamol mediante nebulizador continuo o intermitente en la crisis asmática severa según la estrategia GINA?",
-            options: [
-                "2.5 a 5 mg nebulizados cada 20 minutos durante la primera hora",
-                "10 mg en bolo directo intravenoso cada 8 horas",
-                "0.5 mg vía subcutánea cada 6 horas",
-                "100 mcg (2 disparos) vía oral disueltos en agua cada hora"
-            ],
-            correct: 0,
-            justification: "En crisis severas, la nebulización de Salbutamol a dosis de 2.5 a 5 mg repetida cada 20 minutos (o continua) durante la primera hora es la terapia agonista beta-2 rápida estándar de primera línea."
-        },
-        {
-            question: "¿Cuál es el mecanismo de acción fundamental del Bromuro de Ipratropio al ser combinado con SABA en el tratamiento prehospitalario de la crisis asmática severa?",
-            options: [
-                "Antagonista competitivo de los receptores muscarínicos M3, reduciendo el tono vagal bronquial y la producción de secreciones",
-                "Estabilizador de la membrana del mastocito que impide la degranulación de histamina",
-                "Inhibidor de la fosfodiesterasa que incrementa el AMP cíclico intracelular de forma sistémica",
-                "Agonista directo de los receptores alfa-1 adrenérgicos produciendo vasoconstricción local"
-            ],
-            correct: 0,
-            justification: "El ipratropio bloquea la vía colinérgica vagal en las vías aéreas centrales, logrando un efecto broncodilatador aditivo al del Salbutamol y reduciendo las secreciones."
-        },
-        {
-            question: "Un paciente de 28 años presenta una crisis asmática moderada-severa. ¿Cuál es el objetivo principal de administrar corticoides sistémicos (ej. Hidrocortisona o Prednisona) en la fase inicial?",
-            options: [
-                "Reducir la inflamación de la vía aérea y acelerar la resolución de la crisis previniendo recaídas tardías",
-                "Generar broncodilatación lisa inmediata en los primeros 3 a 5 minutos de infusión",
-                "Inhibir de manera directa la tos mediante el bloqueo del centro respiratorio central",
-                "Reemplazar completamente el uso de agonistas beta-2 adrenérgicos de acción corta"
-            ],
-            correct: 0,
-            justification: "Los esteroides tardan entre 4 y 6 horas en ejercer su efecto genómico pleno; no son broncodilatadores directos inmediatos, pero reducen la inflamación y previenen el deterioro o recaída."
-        },
-        {
-            question: "En la atención prehospitalaria (TSUM), ¿cuál es el mecanismo principal por el cual el Sulfato de Magnesio IV ayuda a revertir el broncospasmo severo refractario?",
-            options: [
-                "Inhibe la entrada de calcio a las células del músculo liso bronquial, promoviendo su relajación",
-                "Inactiva directamente los anticuerpos IgE circulantes en el torrente sanguíneo",
-                "Estimula los receptores periféricos para incrementar el volumen corriente de forma refleja",
-                "Aumenta la viscosidad del moco para facilitar su expulsión con la tos"
-            ],
-            correct: 0,
-            justification: "El magnesio actúa como un bloqueador natural de los canales de calcio dependientes de voltaje en la musculatura lisa bronquial, produciendo broncodilatación en crisis refractarias."
-        },
-        {
-            question: "Durante el monitoreo de enfermería en un paciente crítico con crisis asmática severa, ¿cuál de los siguientes patrones en la gasometría arterial indica un agotamiento muscular respiratorio inminente?",
-            options: [
-                "Normalización o incremento progresivo de la PaCO2 (hipercapnia) con acidosis respiratoria",
-                "Alcalosis respiratoria pura con PaCO2 muy baja (<30 mmHg)",
-                "Hiperoxia aislada con PaO2 mayor a 150 mmHg sin aporte de oxígeno",
-                "Aumento sostenido del pH sanguíneo por encima de 7.55"
-            ],
-            correct: 0,
-            justification: "Al inicio, la hiperventilación produce hipocapnia. Si la PaCO2 se normaliza o sube en un paciente con dificultad respiratoria, indica que los músculos se agotaron y se acerca la falla respiratoria."
-        },
-        {
-            question: "Al administrar Salbutamol a dosis altas en nebulización de forma repetida, ¿cuál es la alteración hidroelectrolítica secundaria que la enfermera/o debe vigilar estrechamente?",
-            options: [
-                "Hipopotasemia (Hipokalemia) por desplazamiento del potasio al espacio intracelular",
-                "Hipercalcemia severa con acortamiento del intervalo QT",
-                "Hipernatremia grave con signos de deshidratación celular central",
-                "Acidosis metabólica por hiperclorémica inducida por el fármaco"
-            ],
-            correct: 0,
-            justification: "Los agonistas beta-2 estimulan la bomba Na+/K+ ATPasa, desplazando el potasio extracelular al interior de las células, lo que puede provocar hipopotasemia severa y arritmias."
-        },
-        {
-            question: "En la evaluación del Flujo Espiratorio Pico (PEF) en el manejo del asma, un valor inferior a qué porcentaje del teórico/personal del paciente clasifica la crisis como SEVERA:",
-            options: [
-                "Menor al 50%",
-                "Entre el 70% y el 80%",
-                "Menor al 90%",
-                "Entre el 85% y el 95%"
-            ],
-            correct: 0,
-            justification: "Un PEF < 50% del valor teórico o del mejor personal del paciente es un indicador objetivo universal de crisis asmática severa según las guías clínicas internacionales."
-        },
-        {
-            question: "¿Cuál es el riesgo principal de administrar oxígeno a concentraciones excesivamente altas (sin titular) en un paciente con retención crónica o fatiga en crisis asmática?",
-            options: [
-                "Suprimir el estímulo hipóxico respiratorio en pacientes hipercapnicos y empeorar la atelectasia por reabsorción",
-                "Inducir de inmediato un neumotórax a tensión por hiperinsuflación dinámica",
-                "Inactivar los receptores beta-2 adrenérgicos en la pared bronquial",
-                "Precipitar un cuadro agudo de edema agudo de pulmón cardiogénico"
-            ],
-            correct: 0,
-            justification: "El oxígeno debe titularse para SpO2 de 93-95%. Aportes desmedidos desequilibran la relación V/Q y pueden empeorar la hipercapnia por abolición de la vasoconstricción hipóxica."
-        },
-        {
-            question: "VERDADERO O FALSO: Los corticosteroides inhalados (como la Beclometasona o Budesonida) son el tratamiento de rescate primario de acción inmediata para revertir el broncospasmo en una crisis asmática severa.",
-            options: [
-                "Verdadero",
-                "Falso"
-            ],
-            correct: 1,
-            justification: "FALSO. Los corticoides inhalados son la piedra angular del tratamiento de mantenimiento/control a largo plazo, no broncodilatadores de rescate inmediato (donde los SABA como el Salbutamol son la elección)."
-        },
-        {
-            question: "VERDADERO O FALSO: La administración de un agonista beta-2 mediante Inhalador de Dosis Medida (MDI) equipado con cámara de espaciación puede ser tan eficaz como una nebulización en la crisis asmática leve a moderada.",
-            options: [
-                "Verdadero",
-                "Falso"
-            ],
-            correct: 0,
-            justification: "VERDADERO. Múltiples ensayos clínicos demuestran que el MDI con cámara espaciadora bien utilizado tiene una eficacia equivalente a la nebulización en crisis leves a moderadas, con menos efectos sistémicos."
-        },
-        {
-            question: "VERDADERO O FALSO: El término 'Status Asthmaticus' o Asma Casi Fatal hace referencia a una crisis asmática grave que no responde al tratamiento broncodilatador inicial y evoluciona rápidamente a falla respiratoria.",
-            options: [
-                "Verdadero",
-                "Falso"
-            ],
-            correct: 0,
-            justification: "VERDADERO. Define la urgencia médica extrema refractaria a la terapia inicial con broncodilatadores y esteroides, requiriendo manejo en cuidados intensivos e invasión de vía aérea si falla la VNI."
-        },
-        {
-            question: "VERDADERO O FALSO: En la atención prehospitalaria de un paciente en crisis asmática, la sedación con benzodiacepinas está altamente indicada para calmar la ansiedad y mejorar la dinámica respiratoria.",
-            options: [
-                "Verdadero",
-                "Falso"
-            ],
-            correct: 1,
-            justification: "FALSO. Las benzodiacepinas deprimen el centro respiratorio y pueden precipitar un paro respiratorio en un paciente agotado. La ansiedad es un síntoma directo de la hipoxia y debe tratarse con oxígeno y broncodilatadores."
-        },
-        {
-            question: "VERDADERO O FALSO: La presencia de pulsus paradoxus (caída de la presión arterial sistólica >10 mmHg durante la inspiración) es un signo clínico objetivo de severidad en la exacerbación asmática.",
-            options: [
-                "Verdadero",
-                "Falso"
-            ],
-            correct: 0,
-            justification: "VERDADERO. Se produce por las severas oscilaciones de la presión intratorácica causadas por la hiperinsuflación y el atrapamiento aéreo masivo, reflejando gran compromiso mecánico."
-        }
-    ];
+    <!-- Main Exam Interface -->
+    <div id="exam-screen" class="hidden">
+        <header>
+            <div class="header-container">
+                <div class="header-title">
+                    <h1 id="hdr-student-name">Alumno</h1>
+                    <p id="hdr-student-career">Carrera</p>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-badge" id="timer-badge">⏱️ 00:00</div>
+                    <div class="stat-badge correct-badge" id="correct-badge">✓ 0/40</div>
+                    <div class="stat-badge error-badge" id="error-badge">✗ 0/40</div>
+                    <div class="stat-badge" id="progress-badge">1 / 40</div>
+                </div>
+            </div>
+        </header>
 
-    const TOTAL_QUESTIONS_TO_SHOW = 15;
-    const TOTAL_TIME_SECONDS = (10 * 45) + (5 * 40); // 650 segundos
+        <div class="container">
+            <div class="top-nav-bar">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Navegación de Preguntas</span>
+                <button class="btn" style="width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="nextQuestion()" id="top-btn-next" disabled>Siguiente ➡️</button>
+                <button class="btn hidden" style="background: var(--success); width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="finishExam()" id="top-btn-finish" disabled>Finalizar 🏁</button>
+            </div>
 
-    let currentQuestions = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let timerInterval = null;
-    let timeRemaining = TOTAL_TIME_SECONDS;
-    let selectedOptionIndex = null;
+            <div class="card" id="question-card">
+                <div class="q-header">
+                    <span class="q-module" id="q-module">MÓDULO</span>
+                    <span class="q-tag" id="q-tag">Tox</span>
+                </div>
+                <div class="q-text" id="q-text">Cargando pregunta...</div>
+                <div class="options-list" id="options-list"></div>
+                
+                <div class="feedback-box" id="feedback-box">
+                    <div class="feedback-title" id="fb-title"></div>
+                    <div id="fb-text"></div>
+                </div>
+            </div>
 
-    function shuffleArray(array) {
-        const arr = [...array];
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+                <button class="btn" style="width: auto;" onclick="nextQuestion()" id="btn-next" disabled>Siguiente Pregunta ➡️</button>
+                <button class="btn hidden" style="background: var(--success); width: auto;" onclick="finishExam()" id="btn-finish" disabled>Finalizar Examen 🏁</button>
+            </div>
+        </div>
+    </div>
 
-    function initQuiz() {
-        currentQuestions = shuffleArray(fullQuestionBank);
-        currentQuestionIndex = 0;
-        score = 0;
-        timeRemaining = TOTAL_TIME_SECONDS;
-        
-        document.getElementById("quiz-screen").style.display = "block";
-        document.getElementById("results-screen").style.display = "none";
-        document.getElementById("total-questions-num").innerText = TOTAL_QUESTIONS_TO_SHOW;
-
-        startTimer();
-        showQuestion();
-    }
-
-    function startTimer() {
-        clearInterval(timerInterval);
-        updateTimerDisplay();
-        timerInterval = setInterval(() => {
-            timeRemaining--;
-            updateTimerDisplay();
-            if (timeRemaining <= 0) {
-                clearInterval(timerInterval);
-                finishQuiz(true);
-            }
-        }, 1000);
-    }
-
-    function updateTimerDisplay() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        document.getElementById("timer-display").innerText = 
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function showQuestion() {
-        const q = currentQuestions[currentQuestionIndex];
-        selectedOptionIndex = null;
-
-        document.getElementById("current-question-num").innerText = currentQuestionIndex + 1;
-        document.getElementById("question-text").innerText = `${currentQuestionIndex + 1}. ${q.question}`;
-        
-        const progressPercent = ((currentQuestionIndex) / TOTAL_QUESTIONS_TO_SHOW) * 100;
-        document.getElementById("progress-bar").style.width = `${progressPercent}%`;
-
-        const optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
-
-        const feedbackBox = document.getElementById("feedback-box");
-        feedbackBox.className = "feedback-box";
-        feedbackBox.style.display = "none";
-        feedbackBox.innerHTML = "";
-
-        document.getElementById("next-btn").disabled = true;
-
-        q.options.forEach((opt, idx) => {
-            const li = document.createElement("li");
-            const btn = document.createElement("button");
-            btn.className = "option-btn";
-            btn.innerText = opt;
-            btn.onclick = () => selectOption(idx);
-            li.appendChild(btn);
-            optionsContainer.appendChild(li);
-        });
-    }
-
-    function selectOption(index) {
-        if (selectedOptionIndex !== null) return;
-        selectedOptionIndex = index;
-
-        const q = currentQuestions[currentQuestionIndex];
-        const buttons = document.querySelectorAll(".option-btn");
-        const feedbackBox = document.getElementById("feedback-box");
-
-        buttons.forEach((btn, idx) => {
-            btn.disabled = true;
-            if (idx === q.correct) {
-                btn.classList.add("correct");
-            }
-            if (idx === index && index !== q.correct) {
-                btn.classList.add("incorrect");
-            }
-        });
-
-        if (index === q.correct) {
-            score++;
-            feedbackBox.className = "feedback-box correct";
-            feedbackBox.innerHTML = `<strong>¡Correcto!</strong> ${q.justification}`;
-        } else {
-            feedbackBox.className = "feedback-box incorrect";
-            feedbackBox.innerHTML = `<strong>Incorrecto.</strong> ${q.justification}`;
-        }
-
-        document.getElementById("next-btn").disabled = false;
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < TOTAL_QUESTIONS_TO_SHOW) {
-            showQuestion();
-        } else {
-            finishQuiz(false);
-        }
-    }
-
-    function finishQuiz(timeOut = false) {
-        clearInterval(timerInterval);
-        document.getElementById("quiz-screen").style.display = "none";
-        document.getElementById("results-screen").style.display = "block";
-
-        const finalScore10 = ((score / TOTAL_QUESTIONS_TO_SHOW) * 10).toFixed(1);
-        document.getElementById("final-score").innerText = finalScore10;
-
-        const scoreMsg = document.getElementById("score-message");
-        const scoreDetails = document.getElementById("score-details");
-
-        if (timeOut) {
-            scoreMsg.innerText = "⏰ ¡El tiempo ha expirado!";
-            scoreMsg.style.color = "var(--incorrect)";
-        } else if (finalScore10 >= 8.0) {
-            scoreMsg.innerText = "🎉 ¡Excelente desempeño clínico y prehospitalario!";
-            scoreMsg.style.color = "var(--correct)";
-        } else if (finalScore10 >= 6.0) {
-            scoreMsg.innerText = "⚠️ Aprobado. Se recomienda revisar los errores en el manejo técnico.";
-            scoreMsg.style.color = "#d97706";
-        } else {
-            scoreMsg.innerText = "❌ No aprobado. Requiere repaso profundo de la guía clínica de Asma.";
-            scoreMsg.style.color = "var(--incorrect)";
-        }
-
-        scoreDetails.innerText = `Respondiste correctamente ${score} de ${TOTAL_QUESTIONS_TO_SHOW} preguntas.`;
-    }
-
-    function restartQuiz() {
-        initQuiz();
-    }
-
-    window.onload = initQuiz;
-</script>
-
-</body>
-</html>
+    <!-- Results Screen -->
+    <div id="results-screen" class="container hidden">
+        <div class="card">
+            <h2 style="color: var(--primary); text-align: center; margin-bottom: 4px; font-size: 1.1rem;">Resultados de la Evaluación</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1
