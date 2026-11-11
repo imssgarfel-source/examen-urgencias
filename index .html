@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Examen Integrador de Urgencias Médicas - TSUM y Enfermería</title>
+    <title>Examen Integrador de Urgencias Médicas - TSUM</title>
     <style>
         :root {
             --primary: #1a365d;
@@ -19,7 +19,6 @@
             --text-muted: #718096;
             --border: #e2e8f0;
         }
-
         /* NÚCLEO INMUTABLE 1: BLINDAJE TÁCTIL Y ANTI-SELECCIÓN */
         html, body {
             width: 100%;
@@ -38,19 +37,16 @@
             user-select: none;
             -webkit-touch-callout: none;
         }
-
         body {
             padding-bottom: 20px;
             overflow-y: auto;
         }
-
         header {
             background: var(--primary);
             color: white;
             padding: 8px 12px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .header-container {
             max-width: 900px;
             margin: 0 auto;
@@ -60,26 +56,20 @@
             flex-wrap: wrap;
             gap: 4px;
         }
-
         .header-title h1 {
             font-size: 0.9rem;
             font-weight: 700;
-            margin: 0;
         }
-
         .header-title p {
             font-size: 0.7rem;
             opacity: 0.85;
-            margin: 0;
         }
-
         .header-stats {
             display: flex;
             gap: 4px;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .stat-badge {
             background: rgba(255, 255, 255, 0.15);
             padding: 3px 6px;
@@ -90,16 +80,13 @@
             align-items: center;
             gap: 2px;
         }
-
         .stat-badge.correct-badge { background: rgba(47, 133, 90, 0.4); }
         .stat-badge.error-badge { background: rgba(197, 48, 48, 0.4); }
-
         .container {
             max-width: 900px;
             margin: 10px auto;
             padding: 0 8px;
         }
-
         .card {
             background: var(--card);
             border-radius: 8px;
@@ -108,16 +95,13 @@
             border: 1px solid var(--border);
             margin-bottom: 10px;
         }
-
         #registration-screen, #blocked-screen {
             max-width: 400px;
             margin: 30px auto;
         }
-
         .form-group {
             margin-bottom: 12px;
         }
-
         .form-group label {
             display: block;
             font-weight: 600;
@@ -125,7 +109,6 @@
             color: var(--primary);
             font-size: 0.9rem;
         }
-
         .form-group input, .form-group select {
             width: 100%;
             padding: 8px;
@@ -135,9 +118,7 @@
             outline: none;
             -webkit-user-select: text;
             user-select: text;
-            box-sizing: border-box;
         }
-
         .btn {
             background: var(--primary);
             color: white;
@@ -150,17 +131,14 @@
             width: 100%;
             transition: background 0.2s;
         }
-
         .btn:hover:not(:disabled) { background: var(--primary-light); }
         .btn:disabled { background: #a0aec0; cursor: not-allowed; }
-
         .q-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 6px;
         }
-
         .q-tag {
             font-size: 0.65rem;
             font-weight: 700;
@@ -169,32 +147,28 @@
             background: #e2e8f0;
             color: #4a5568;
         }
-
-        .q-tag.toxicologia { background: #fed7d7; color: #9b2c2c; }
-        .q-tag.otorrino { background: #feebc8; color: #7b341e; }
-        .q-tag.oftalmo { background: #ebf8ff; color: #2b6cb0; }
-
+        .q-tag.g1 { background: #ebf8ff; color: #2b6cb0; }
+        .q-tag.g2 { background: #fefcbf; color: #744210; }
+        .q-tag.g3 { background: #fed7d7; color: #9b2c2c; }
+        .q-tag.g4 { background: #e9d8fd; color: #553c9a; }
+        .q-tag.g5 { background: #feebc8; color: #7b341e; }
         .q-module {
             font-size: 0.7rem;
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
         }
-
         .q-text {
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 10px;
             color: #1a202c;
-            line-height: 1.4;
         }
-
         .options-list {
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
-
         .option-btn {
             background: #f8fafc;
             border: 1px solid var(--border);
@@ -207,25 +181,20 @@
             display: flex;
             align-items: flex-start;
             gap: 6px;
-            line-height: 1.3;
         }
-
         .option-btn:hover:not(:disabled) { background: #edf2f7; border-color: #cbd5e0; }
         .option-btn:disabled { cursor: default; }
-
         .option-btn.correct {
             background: var(--success-bg) !important;
             border-color: var(--success) !important;
             color: var(--success) !important;
             font-weight: 600;
         }
-
         .option-btn.incorrect {
             background: var(--error-bg) !important;
             border-color: var(--error) !important;
             color: var(--error) !important;
         }
-
         .feedback-box {
             margin-top: 8px;
             padding: 8px 10px;
@@ -233,15 +202,11 @@
             font-size: 0.78rem;
             display: none;
             animation: fadeIn 0.3s ease-in;
-            line-height: 1.35;
         }
-
         .feedback-box.show { display: block; }
         .feedback-box.correct-fb { background: var(--success-bg); border-left: 4px solid var(--success); color: #22543d; }
         .feedback-box.incorrect-fb { background: var(--error-bg); border-left: 4px solid var(--error); color: #742a2a; }
-
         .feedback-title { font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
-
         .top-nav-bar {
             display: flex;
             justify-content: space-between;
@@ -253,7 +218,6 @@
             margin-bottom: 10px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
-
         .score-summary { text-align: center; padding: 10px 0; }
         .score-circle {
             width: 90px; height: 90px; border-radius: 50%;
@@ -263,15 +227,12 @@
         }
         .score-val { font-size: 1.6rem; font-weight: 800; line-height: 1; }
         .score-max { font-size: 0.7rem; opacity: 0.8; }
-
         .module-breakdown { margin-top: 15px; }
         .module-item { margin-bottom: 8px; }
         .module-info { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px; font-weight: 600; }
         .progress-bar { height: 5px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.5s ease-out; }
-
         .hidden { display: none !important; }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-3px); }
             to { opacity: 1; transform: translateY(0); }
@@ -279,7 +240,6 @@
     </style>
 </head>
 <body>
-
     <!-- NÚCLEO INMUTABLE 2: BLOQUEO POR DISPOSITIVO (LOCALSTORAGE) -->
     <div id="blocked-screen" class="container hidden">
         <div class="card" style="text-align: center; padding: 20px;">
@@ -291,33 +251,29 @@
             <button class="btn" style="background: var(--primary);" onclick="requestUnlock()">Desbloquear con Clave Docente</button>
         </div>
     </div>
-
     <!-- Registration Screen -->
     <div id="registration-screen" class="container">
         <div class="card">
             <h2 style="color: var(--primary); margin-bottom: 4px; text-align: center; font-size: 1.1rem;">Examen Integrador de Urgencias Médicas</h2>
-            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Toxicología | Otorrinolaringología | Oftalmología</p>
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Toxicología, Otorrinolaringología y Oftalmología — TSUM</p>
             
             <form id="reg-form" onsubmit="startExam(event)">
                 <div class="form-group">
                     <label for="student-name">Nombre Completo del Alumno:</label>
-                    <input type="text" id="student-name" required placeholder="Ej. Juan Carlos García Santiago">
+                    <input type="text" id="student-name" required placeholder="Ej. Juan Pérez García">
                 </div>
                 
                 <div class="form-group">
-                    <label for="student-career">Carrera / Programa Académico:</label>
+                    <label for="student-career">Carrera / Perfil:</label>
                     <select id="student-career" required>
                         <option value="">Seleccione una opción...</option>
                         <option value="Técnico Superior en Urgencias Médicas (TSUM)">Técnico Superior en Urgencias Médicas (TSUM)</option>
-                        <option value="Licenciatura en Enfermería">Licenciatura en Enfermería</option>
                     </select>
                 </div>
-
                 <button type="submit" class="btn">Iniciar Examen</button>
             </form>
         </div>
     </div>
-
     <!-- Main Exam Interface -->
     <div id="exam-screen" class="hidden">
         <header>
@@ -334,18 +290,16 @@
                 </div>
             </div>
         </header>
-
         <div class="container">
             <div class="top-nav-bar">
                 <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Navegación de Preguntas</span>
                 <button class="btn" style="width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="nextQuestion()" id="top-btn-next" disabled>Siguiente ➡️</button>
                 <button class="btn hidden" style="background: var(--success); width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="finishExam()" id="top-btn-finish" disabled>Finalizar 🏁</button>
             </div>
-
             <div class="card" id="question-card">
                 <div class="q-header">
                     <span class="q-module" id="q-module">MÓDULO</span>
-                    <span class="q-tag" id="q-tag">Tox</span>
+                    <span class="q-tag" id="q-tag">G1</span>
                 </div>
                 <div class="q-text" id="q-text">Cargando pregunta...</div>
                 <div class="options-list" id="options-list"></div>
@@ -355,16 +309,266 @@
                     <div id="fb-text"></div>
                 </div>
             </div>
-
             <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
                 <button class="btn" style="width: auto;" onclick="nextQuestion()" id="btn-next" disabled>Siguiente Pregunta ➡️</button>
                 <button class="btn hidden" style="background: var(--success); width: auto;" onclick="finishExam()" id="btn-finish" disabled>Finalizar Examen 🏁</button>
             </div>
         </div>
     </div>
-
     <!-- Results Screen -->
     <div id="results-screen" class="container hidden">
         <div class="card">
             <h2 style="color: var(--primary); text-align: center; margin-bottom: 4px; font-size: 1.1rem;">Resultados de la Evaluación</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 12px;" id="res-student-info"></p>
+            <div class="score-summary">
+                <div class="score-circle">
+                    <div class="score-val" id="res-score-val">0.0</div>
+                    <div class="score-max">de 10.0</div>
+                </div>
+                <p id="res-time-summary" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;"></p>
+                <p id="res-feedback-summary" style="font-weight: 600; color: var(--primary); font-size: 0.85rem;"></p>
+            </div>
+            <div class="module-breakdown" id="module-breakdown">
+                <h3 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 8px;">Desglose de Desempeño por Módulo:</h3>
+            </div>
+            <div style="margin-top: 15px;">
+                <button class="btn" style="background: #4a5568;" onclick="requestFacultyReset()">Reinicio Docente (Clave Requerida)</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        /* NÚCLEO INMUTABLE 3: BANCO DE 40 REACTIVOS OFICIALES TSUM */
+        const questions = [
+            { id: 1, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "¿Cuál es la vía de absorción de tóxicos más frecuente en la atención prehospitalaria (APH), representando el 79% de los casos atendidos?", options: ["A) Vía respiratoria", "B) Vía digestiva / oral", "C) Vía cutánea / mucocutánea", "D) Vía parenteral"], correct: 1, fb: "De acuerdo con las estadísticas de prevalencia en atención prehospitalaria, la vía digestiva u oral representa el 79% de los casos (común en ingestas de medicamentos, productos domésticos, plaguicidas, plantas y hongos)." },
+            { id: 2, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "¿Cómo se clasifican toxicológicamente sustancias como las metanfetaminas, el fentanilo o el éxtasis (MDMA), diseñadas y sintetizadas íntegramente en laboratorios sin existir en la naturaleza?", options: ["A) Drogas naturales procesadas", "B) Drogas semisintéticas", "C) Drogas totalmente sintéticas (Antropogénicas puras)", "D) Xenobióticos de origen fitotóxico"], correct: 2, fb: "Las drogas totalmente sintéticas o antropogénicas puras no existen en la naturaleza; son diseñadas, sintetizadas y producidas íntegramente en laboratorios a través de síntesis química." },
+            { id: 3, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "Una paciente de 5 años es llevada a urgencias tras consumir accidentalmente un hongo silvestre recolectado en el jardín. A las 10 horas de la ingestión, inicia con cuadro de diarrea acuosa profusa, vómito y datos iniciales de daño hepático. ¿Cuál es la toxina responsable de este cuadro clínico derivado del hongo Amanita phalloides?", options: ["A) Muscarina pura de acción directa", "B) Amatoxinas con bloqueo de la RNA polimerasa", "C) Coprina inhibidora de la acetaldehído deshidrogenasa", "D) Ácido iboténico con efecto alucinógeno central"], correct: 1, fb: "Las amatoxinas presentes en Amanita phalloides bloquean la enzima RNA polimerasa, desencadenando una necrosis hepática y renal fulminante tras un periodo de latencia largo." },
+            { id: 4, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "¿En qué estados de la República Mexicana se registra el mayor riesgo y la mayor incidencia de picaduras por alacrán (Centruroides sp.)?", options: ["A) Sonora, Chihuahua y Coahuila", "B) Colima, Nayarit y Jalisco", "C) Yucatán, Quintana Roo y Campeche", "D) Veracruz, Tabasco y Chiapas"], correct: 1, fb: "México ocupa el primer lugar mundial en picaduras de alacrán, identificándose a Colima, Nayarit y Jalisco como los estados con mayor riesgo y tasa por habitante." },
+            { id: 5, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "Un paciente adolescente es llevado al servicio de urgencias tras una ingesta intencional masiva de comprimidos de paracetamol hace 2 horas. Asintomático en este momento, ¿cuál es el antídoto específico de elección que debe considerarse y administrarse oportunamente para prevenir el daño hepático fulminante?", options: ["A) N-acetilcisteína", "B) Naloxona en infusión continua", "C) Flumazenilo en bolo intravenoso", "D) Pralidoxima (PAM)"], correct: 0, fb: "La N-acetilcisteína actúa como un precursor del glutatión, neutralizando el metabolito tóxico NAPQI derivado de la sobredosis de paracetamol y previniendo la necrosis hepática aguda." },
+            { id: 6, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G2", text: "Un equipo de TSUM atiende a un adulto intoxicado agudamente por vía oral con organofosforados. Al preparar el equipo para realizar el lavado gástrico, ¿cuál es la posición anatómica correcta en la que se debe colocar al paciente en la camilla?", options: ["A) Decúbito supino estricto con elevación cefálica a 45 grados", "B) Decúbito lateral izquierdo con inclinación de Trendelenburg ligero a 20 grados", "C) Decúbito lateral derecho con Trendelenburg inverso completo", "D) Decúbito prono con soporte torácico y rodillas extendidas"], correct: 1, fb: "El paciente debe posicionarse en decúbito lateral izquierdo con Trendelenburg ligero (aproximadamente 20 grados) y rodillas flexionadas para reducir el paso del contenido gástrico hacia el duodeno." },
+            { id: 7, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G2", text: "Un grupo de personas presenta síntomas tras consumir hongos silvestres. Un subgrupo inició síntomas a las 2 horas, mientras que otro inició con diarrea y vómito a las 9 horas. ¿Qué implicación clínica tiene este periodo de latencia larga (>6 h)?", options: ["A) Orientación a un cuadro benigno autocontenido por toxinas gastroenteríticas primarias", "B) Alta sospecha de síndrome faloideo / amatoxínico con riesgo de falla hepática y renal fulminante", "C) Confirmación de síndrome muscarínico tratable con dosis bajas de atropina", "D) Presencia de un síndrome giromítrico con requerimiento de piridoxina"], correct: 1, fb: "El síndrome faloideo / amatoxínico se caracteriza por un periodo de latencia largo (>6 horas), seguido de gastroenteritis e insuficiencia hepática y renal fulminante." },
+            { id: 8, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G2", text: "Durante la evaluación de un paciente mordido por una serpiente, el TSUM observa dos marcas de colmillos, edema masivo progresivo, equimosis y sangrado activo en encías. ¿A qué familia corresponde y qué tratamiento definitivo está indicado?", options: ["A) Elápidos (Coralillo) - Anticoralillo", "B) Viperinos (Cascabel / Nauyaca) - Faboterapéutico Antivipmyn", "C) Colúbridos - Torniquete e incisión local", "D) Boidos - Antihistamínicos e hielo local"], correct: 1, fb: "Las serpientes viperinas provocan dos marcas de colmillos, edema masivo, necrosis y coagulopatía. Su tratamiento definitivo es el faboterapéutico antiviperino (Antivipmyn)." },
+            { id: 9, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G2", text: "Un TSUM atiende a un paciente colapsado en vía pública que presenta bradicardia severa, estupor profundo y depresión respiratoria marcada con un patrón de respiración superficial (frecuencia respiratoria de 6 respiraciones por minuto) y pupilas mióticas puntiformes, con antecedentes de consumo de sustancias ilícitas. ¿Cuál es el toxídrome sospechoso y la conducta prehospitalaria prioritaria?", options: ["A) Toxídrome simpaticomimético; administrar diazepam en bolo intravenoso", "B) Toxídrome colinérgico; administrar sulfato de atropina en infusión rápida", "C) Toxídrome opioide por intoxicación aguda de fentanilo; asegurar vía aérea y administrar naloxona", "D) Toxídrome anticolinérgico; administrar fisostigmina intramuscular"], correct: 2, fb: "La triada clásica de depresión respiratoria severa, miosis puntiforme y alteración del estado de conciencia sugiere un toxídrome opioide por fentanilo u otro opiáceo, requiriendo soporte ventilatorio inmediato y administración de naloxona." },
+            { id: 10, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G3", text: "Varón de 48 años con lesión en antebrazo con área central violácea rodeada por halo pálido y eritema (placa marmórea), orina obscura (hemoglobinuria) e ictericia leve. ¿Cuál es el diagnóstico, toxina y tratamiento?", options: ["A) Latrodectismo grado 3 por alfa-latrotoxina; Aracmyn PLUS", "B) Loxoscelismo cutáneo-visceral (araña violinista) por esfingomielinasa D; Reclusmyn", "C) Alacranismo grado 2 por escorpionina; Alacramyn", "D) Mordedura por serpiente de coral; Anticoralillo"], correct: 1, fb: "El loxoscelismo cutáneo-visceral (araña violinista) es causado por la esfingomielinasa D. Su forma sistémica presenta hemólisis e ictericia; el tratamiento es el faboterapéutico Reclusmyn." },
+            { id: 11, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G3", text: "Agricultor con toxídrome colinérgico agudo por organofosforados (sialorrea, miosis, fasciculaciones, broncorrea y FC de 42 lpm). ¿Cuál es la intervención farmacológica prioritaria?", options: ["A) Administrar atropina IV duplicando dosis cada 5-10 min hasta atropinización y asegurar vía aérea", "B) Administrar flumazenilo 0.3 mg IV en bolo inmediato seguido de inducción del vómito", "C) Administrar naloxona 0.4 mg IV e iniciar lavado gástrico con eméticos", "D) Administrar N-acetilcisteína VO e infusión de bicarbonato de sodio"], correct: 0, fb: "El toxídrome colinérgico agudo por organofosforados se maneja prioritariamente con atropina IV duplicando la dosis hasta revertir la broncorrea y bradicardia." },
+            { id: 12, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G3", text: "Paciente que ingirió 200 mL de sosa cáustica (hidróxido de sodio), presentando estridor, dolor retroesternal y sialorrea con sangre. El personal sugiere lavado gástrico y carbón activado. ¿Cuál es la conducta médica correcta?", options: ["A) Realizar lavado gástrico e instilar carbón activado a dosis de 1 g/kg", "B) Administrar vinagre para neutralizar la base cáustica", "C) Contraindicar de forma absoluta el lavado gástrico y el carbón activado por riesgo de perforación", "D) Inducir el vómito inmediatamente mediante estimulación faríngea"], correct: 2, fb: "La ingesta de sustancias cáusticas o corrosivas es una contraindicación absoluta para el lavado gástrico y carbón activado por el elevado riesgo de perforación y neumonitis." },
+            { id: 13, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G1", text: "(Falso o Verdadero) En la atención prehospitalaria de intoxicaciones agudas, la inducción rutinaria del vómito con jarabe de ipecacuana está recomendada de primera línea en todos los pacientes conscientes.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "La inducción rutinaria del vómito está contraindicada y descontinuada en la atención prehospitalaria actual por el alto riesgo de aspiración pulmonar y lesiones mucosas." },
+            { id: 14, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G2", text: "(Falso o Verdadero) El carbón activado es altamente eficaz para adsorber alcoholes, disolventes orgánicos, hidrocarburos y sales de metales pesados como el hierro.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "El carbón activado no adsorbe alcoholes, hidrocarburos, ácidos/álcalis corrosivos ni metales pesados como el hierro o el litio." },
+            { id: 15, module: "BLOQUE 1: TOXICOLOGÍA", tag: "G3", text: "(Falso o Verdadero) La aplicación de un torniquete apretado y la realización de incisiones con navaja sobre la herida por mordedura de serpiente viperina son medidas útiles para extraer el veneno en el sitio del accidente.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "Las incisiones y torniquetes están estrictamente prohibidos porque provocan isquemia y aceleran la necrosis tisular sin neutralizar el veneno." },
+            { id: 16, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G1", text: "¿Cuál es el signo clínico cardinal que le permite a un TSUM identificar en la escena un síndrome de penetración por cuerpo extraño en la vía aérea?", options: ["A) Cianosis distal generalizada en extremidades", "B) Aparición súbita de tos paroxística, estridor y sofocación", "C) Otalgia refleja bilateral severa", "D) Bradicardia extrema con hipotensión"], correct: 1, fb: "El síndrome de penetración se caracteriza por el inicio brusco de tos paroxística, estridor laríngeo y sensación de sofocación tras la entrada accidental de un cuerpo extraño." },
+            { id: 17, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G2", text: "Durante la revisión en la ambulancia, un paciente adulto con OVACE pierde el estado de conciencia de forma súbita. ¿Qué acción debe realizar el personal de urgencias de inmediato?", options: ["A) Administrar atropina intravenosa", "B) Realizar lavado gástrico de emergencia", "C) Colocar cánula orofaríngea sin verificar la boca", "D) Iniciar compresiones torácicas con el paciente en decúbito supino"], correct: 3, fb: "Ante la pérdida de conciencia por OVACE, se debe colocar al paciente en decúbito supino e iniciar el ciclo de compresiones torácicas (RCP)." },
+            { id: 18, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G3", text: "¿Cuál es la primera maniobra prehospitalaria indicada al atender a un paciente con un insecto vivo (animado) en el conducto auditivo externo?", options: ["A) Instilar aceite mineral o lidocaína líquida para inmovilizarlo", "B) Introducir pinzas de disección largas a ciegas", "C) Realizar lavado con agua a presión", "D) Colocar apósito seco y diferir traslado"], correct: 0, fb: "En cuerpos extraños animados, se debe inmovilizar o matar al insecto instilando aceite mineral o anestésico local antes de extraerlo instrumentalmente." },
+            { id: 19, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G4", text: "¿En cuál de las siguientes situaciones está estrictamente contraindicado realizar un lavado ótico en el ámbito de urgencias?", options: ["A) Cerumen impactado sin inflamación", "B) Conducto auditivo externo limpio", "C) Sospecha o confirmación de perforación de la membrana timpánica", "D) Hipoacusia leve de transmisión transitoria"], correct: 2, fb: "La sospecha de perforación timpánica contraindica de forma absoluta el lavado ótico por el riesgo de propagar una infección grave al oído medio." },
+            { id: 20, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G5", text: "¿Cuál es el hallazgo clínico más frecuente en la exploración física de un paciente pediátrico con un cuerpo extraño nasal de larga evolución?", options: ["A) Epistaxis profusa bilateral", "B) Edema masivo bipalpebral", "C) Ausencia total de flujo aéreo nasal bilateral", "D) Rinorrea purulenta unilateral fétida con halitosis"], correct: 3, fb: "La retención prolongada de un cuerpo extraño nasal genera inflamación y sobreinfección, manifestándose con rinorrea purulenta fétida unilateral." },
+            { id: 21, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G1", text: "¿Cómo se deben aplicar los ciclos de desobstrucción en un lactante menor de un año que presenta obstrucción severa por cuerpo extraño?", options: ["A) Alternando 5 golpes interescapulares con 5 compresiones torácicas", "B) Tracción lingual sostenida hacia el exterior", "C) Hiperextensión forzada del cuello en vertical", "D) Compresiones abdominales rápidas"], correct: 0, fb: "En lactantes menores de un año, el protocolo de desobstrucción establece alternar 5 golpes interescapulares con 5 compresiones torácicas en decúbito prono con cabeza en declive." },
+            { id: 22, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G2", text: "Tras un impacto frontal en la vía pública, un paciente presenta deformidad nasal y un abombamiento blando fluctuante en el tabique. ¿Qué complicación local requiere derivación prioritaria?", options: ["A) Ruptura de conductos lagrimales", "B) Desarrollo de un hematoma septal con riesgo de necrosis del cartílago", "C) Trombosis de senos cavernosos", "D) Colapso total por espasmo epiglótico"], correct: 1, fb: "El hematoma septal es una urgencia del trauma nasal que interrumpe la nutrición del cartílago, pudiendo causar necrosis y deformidad si no se drena a tiempo." },
+            { id: 23, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G3", text: "¿Qué herramienta diagnóstica inicial es considerada prioritaria para el TSUM ante la sospecha de fractura de huesos propios de la nariz en la escena?", options: ["A) Tomografía axial computarizada urgente", "B) Resonancia magnética de alta resolución", "C) Anamnesis detallada y exploración física clínica minuciosa", "D) Radiografía simple lateral de cráneo"], correct: 2, fb: "El diagnóstico inicial de la fractura nasal es fundamentalmente clínico (exploración física y palpación), ya que la radiografía simple tiene utilidad muy limitada en urgencias." },
+            { id: 24, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G4", text: "¿Cuál es la postura corporal correcta que debe adoptar un paciente consciente al que se le brinda atención prehospitalaria por una epistaxis anterior?", options: ["A) Decúbito supino con hiperextensión cervical", "B) Posición sedente con la cabeza ligeramente inclinada hacia adelante", "C) Decúbito lateral izquierdo con cabeza neutra", "D) Bipedestación con flexión profunda del tronco"], correct: 1, fb: "La cabeza debe inclinarse ligeramente hacia adelante en posición sedente para evitar la deglución o aspiración de sangre hacia la vía aérea." },
+            { id: 25, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G5", text: "Durante la colocación de un taponamiento nasal anterior por epistaxis refractaria en la ambulancia, ¿qué medida preventiva debe considerar el personal de urgencias?", options: ["A) Mantener el taponamiento por 12 horas máximo", "B) Indicar dieta líquida caliente", "C) Retirar el material hemostático a los 30 minutos", "D) Vigilar la presión arterial y evitar vasoconstrictores en hipertensos descontrolados"], correct: 3, fb: "Se debe vigilar el estado hemodinámico y cifras tensionales, evitando vasoconstrictores simpaticomiméticos en hipertensos para prevenir crisis hipertensivas por absorción mucosa." },
+            { id: 26, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G1", text: "Un equipo de TSUM atiende en la ambulancia a un paciente adulto con epistaxis posterior severa refractaria a taponamiento anterior, por lo que el médico tratante decide colocar una sonda de Foley para el control del sangrado. ¿Qué condición clínica indispensable requiere además este tipo de dispositivo para garantizar su eficacia hemostática en la vía nasal?", options: ["A) Sustituir por completo el soporte posterior sin requerir ninguna clase de compresión adicional.", "B) Requiere de manera complementaria la colocación de un taponamiento anterior para evitar que el balón se desplace hacia la orofaringe y asegurar la compresión adecuada.", "C) Aplicar únicamente irrigación continua con solución fría a presión en los senos paranasales.", "D) Mantener al paciente en posición de decúbito supino estricto sin ningún tipo de gasa de soporte."], correct: 1, fb: "En el manejo de la epistaxis posterior con sonda de Foley, el dispositivo de taponamiento posterior requiere obligatoriamente combinarse con un taponamiento nasal anterior para fijar la posición de la sonda, evitar su desplazamiento y lograr una hemostasia eficaz." },
+            { id: 27, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G2", text: "¿Por qué la presencia de una pila de botón en la fosa nasal o en el oído constituye una emergencia médica absoluta que el TSUM debe reconocer y trasladar prioritariamente?", options: ["A) Por la posibilidad inmediata de generar fracturas óseas espontáneas en el macizo facial.", "B) Por el riesgo inminente de quemadura química, necrosis tisular y perforación por descargas microeléctricas.", "C) Por la inactivación inmediata del centro respiratorio bulbar superior.", "D) Por la formación rápida y masiva de tapones de cerumen compacto obstructivo."], correct: 1, fb: "Las pilas de botón generan descargas microeléctricas y fugas de contenido alcalino que causan quemaduras químicas y necrosis hística en cuestión de pocas horas, requiriendo traslado urgente." },
+            { id: 28, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G1", text: "(Falso o Verdadero) En la atención prehospitalaria de un cuerpo extraño en el conducto auditivo externo consistente en una pila de botón, está indicado realizar un lavado ótico inmediato con solución salina.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "Las pilas de botón en CAE o nariz son emergencias absolutas; el lavado está contraindicado y se requiere extracción instrumental cuidadosa por riesgo de quemadura química y necrosis." },
+            { id: 29, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G2", text: "(Falso o Verdadero) Las epistaxis anteriores se originan en el 90% de los casos en el plexo vascular de Kiesselbach, localizado en el tercio anteroinferior del tabique nasal.", options: ["A) Verdadero", "B) Falso"], correct: 0, fb: "El plexo de Kiesselbach es el sitio anatómico responsable del 90% de las hemorragias nasales anteriores." },
+            { id: 30, module: "BLOQUE 2: OTORRINOLARINGOLOGÍA", tag: "G3", text: "(Falso o Verdadero) Ante la sospecha de una epiglotitis aguda en un paciente pediátrico con sialorrea y dificultad respiratoria, se debe explorar inmediatamente la orofaringe introduciendo un abatelenguas rígido.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "La exploración con abatelenguas en la epiglotitis está estrictamente contraindicada por el riesgo de desencadenar laringoespasmo reflejo fulminante y paro respiratorio." },
+            { id: 31, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G1", text: "Un paramédico realiza la evaluación anatómica externa de un paciente que sufrió una contusión orbitaria directa por un golpe con un balón. Al revisar la capa externa o fibrosa del globo ocular, ¿qué estructuras específicas está inspeccionando en su porción anterior y posterior respectivamente?", options: ["A) Cuerpo ciliar por delante y coroides en la región posterior", "B) Iris en el segmento anterior y retina en la región posterior", "C) Córnea en la región anterior y esclera en la porción posterior", "D) Cristalino por delante y humor vítreo por detrás"], correct: 2, fb: "La capa externa o fibrosa del globo ocular está integrada anatómicamente en su porción posterior por la esclera y en su porción anterior por la córnea." },
+            { id: 32, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G1", text: "Durante la atención de un paciente masculino de 30 años que sufre una agresión física directa en el ojo derecho, el TSUM observa a la exploración física un acúmulo de sangre brillante y nítido que ocupa la parte inferior de la cámara anterior del ojo. ¿Cómo se denomina este hallazgo semiológico característico?", options: ["A) Hifema por hemorragia en la cámara anterior", "B) Hipopión por infiltración leucocitaria", "C) Quemosis conjuntival severa", "D) Simbléfaron traumático agudo"], correct: 0, fb: "El hifema es la acumulación de eritrocitos (sangre) en la cámara anterior del ojo tras un traumatismo contuso, diferenciándose del hipopión que corresponde a una acumulación de pus o leucocitos." },
+            { id: 33, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G1", text: "¿En qué ventana de tiempo debe recibir atención médica o quirúrgica una condición ocular para ser clasificada como una emergencia oftálmica?", options: ["A) Entre 24 y 72 horas", "B) En cualquier momento de la primera semana", "C) En un periodo de 5 a 7 días", "D) En un periodo menor a 24 horas"], correct: 3, fb: "Las emergencias oftálmicas son procesos que comprometen de forma irreversible la visión o la estructura ocular si no reciben atención en menos de 24 horas." },
+            { id: 34, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G2", text: "¿Por qué razón las quemaduras químicas oculares producidas por sustancias álcalis (bases) son clínicamente más severas que las causadas por ácidos?", options: ["A) Porque los álcalis saponifican los lípidos membranales y disuelven proteínas permitiendo una penetración profunda", "B) Porque los álcalis inducen una necrosis por coagulación que limita su avance", "C) Porque los álcalis se cristalizan e inactivan sobre el epitelio corneal", "D) Porque los álcalis afectan únicamente la conjuntiva tarsal sin llegar a la córnea"], correct: 0, fb: "Los álcalis son lipofílicos, saponifican los lípidos de las membranas celulares y disuelven las proteínas de la matriz, permitiendo una penetración rápida y profunda hacia la cámara anterior." },
+            { id: 35, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G2", text: "Un paciente de 65 años es atendido por el equipo prehospitalario tras presentar de forma súbita, severa e indolora una pérdida total de la visión (amaurosis) en el ojo derecho. Considerando que el paramédico en la ambulancia no cuenta con equipo especializado para revisar el fondo de ojo, ¿cuál es la sospecha clínica de este cuadro isquémico agudo?", options: ["A) Conjuntivitis bacteriana hiperaguda con exudado purulento", "B) Oclusión aguda de la arteria central de la retina (OACR)", "C) Glaucoma agudo de ángulo cerrado con edema corneal severo", "D) Desprendimiento de vítreo posterior simple sin afección vascular"], correct: 1, fb: "La oclusión de la arteria central de la retina causa amaurosis de inicio súbito, severa e indolora, diferenciándose clínicamente de los cuadros hipertensivos oculares dolorosos." },
+            { id: 36, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G2", text: "Un paciente adulto mayor es atendido por el equipo prehospitalario debido a un cuadro de glaucoma agudo de ángulo cerrado. A diferencia de las patologías retinianas isquémicas que cursan con amaurosis indolora, ¿cuál es la característica clínica sintomatológica distintiva que presenta este cuadro de hipertensión intraocular severa?", options: ["A) Pérdida visual súbita totalmente indolora sin alteraciones en la tensión ocular", "B) Prurito ocular bilateral constante con secreción purulenta escasa", "C) Dolor ocular y hemicraneal intenso e incapacitante, asociado a visión de halos de colores y ojo rojo duro al tacto", "D) Diplopía vertical aislada con enoftalmos y ausencia de dolor"], correct: 2, fb: "El ataque agudo de glaucoma de ángulo cerrado cursa con elevación brusca de la presión intraocular que se manifiesta con dolor ocular intenso y cefalea (cuadro doloroso), halos alrededor de las luces y dureza pétrea del globo ocular." },
+            { id: 37, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G3", text: "Un paciente sufre una contusión facial por un objeto romo a alta velocidad. Al examen físico presenta enoftalmos (ojo hundido), diplopía en la mirada vertical superior e imposibilidad para elevar el ojo afectado. ¿Qué lesión anatómica explica estos hallazgos?", options: ["A) Fractura del techo de la órbita con lesión de senos paranasales", "B) Fractura de la lámina papirácea con atrapamiento del músculo recto medio", "C) Ruptura del cuerpo ciliar con iridodiálisis", "D) Fractura del piso de la órbita con atrapamiento del músculo recto inferior"], correct: 3, fb: "Las fracturas del piso de la órbita desencadenan enoftalmos por aumento del volumen orbitario y diplopía con limitación para la elevación del ojo por atrapamiento del músculo recto inferior." },
+            { id: 38, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G1", text: "(Falso o Verdadero) Ante la sospecha de un traumatismo ocular abierto en la atención prehospitalaria, está indicado aplicar un parche presivo apretado de gasa para contener el sangrado.", options: ["A) Falso", "B) Verdadero"], correct: 0, fb: "En el traumatismo ocular abierto está estrictamente prohibido aplicar parches presivos; se debe colocar un escudo rígido apoyado en los bordes óseos orbitarios para no extruir el contenido ocular." },
+            { id: 39, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G2", text: "(Falso o Verdadero) Los corticoides tópicos (como la dexametasona) están indicados de primera línea en las abrasiones corneales simples para acelerar el alivio del dolor y la inflamación.", options: ["A) Verdadero", "B) Falso"], correct: 1, fb: "Los corticoides tópicos inhiben la epitelización corneal deprimiendo la inmunidad local y aumentando el riesgo de perforación ocular y superinfección, por lo que están contraindicados." },
+            { id: 40, module: "BLOQUE 3: OFTALMOLOGÍA", tag: "G3", text: "(Falso o Verdadero) En una quemadura ocular química por sustancias álcalis, la medida prehospitalaria prioritaria (Prioridad Cero) es iniciar la irrigación ocular inmediata a chorro continuo con solución salina durante 30 a 60 minutos.", options: ["A) Verdadero", "B) Falso"], correct: 0, fb: "La irrigación continua con solución salina o Ringer Lactato durante 30 a 60 minutos es la medida inmediata y determinante para prevenir la destrucción corneal irreversible ante la exposición a álcalis." }
+        ];
+        let currentIdx = 0;
+        let score = 0;
+        let errors = 0;
+        let studentName = "";
+        let studentCareer = "";
+        let startTime = null;
+        let timerInterval = null;
+        let moduleStats = {};
+        /* NÚCLEO INMUTABLE 4: VALIDACIÓN DE INTENTO PREVIO Y BLOQUEO DE HISTORIAL NATIVO */
+        window.onload = function() {
+            if (localStorage.getItem("exam_completed_tsum_urgencias")) {
+                document.getElementById("registration-screen").classList.add("hidden");
+                document.getElementById("blocked-screen").classList.remove("hidden");
+            }
+            history.pushState(null, null, location.href);
+            window.onpopstate = function() {
+                history.go(1);
+            };
+        };
+        function requestUnlock() {
+            const password = prompt("Ingrese la clave docente para autorizar un nuevo intento en este dispositivo:");
+            if (password === "DOCENTE2026") {
+                localStorage.removeItem("exam_completed_tsum_urgencias");
+                alert("Acceso autorizado. Dispositivo desbloqueado.");
+                location.reload();
+            } else if (password !== null) {
+                alert("Clave docente incorrecta. Acceso denegado.");
+            }
+        }
+        function initStats() {
+            moduleStats = {};
+            questions.forEach(q => {
+                if (!moduleStats[q.module]) {
+                    moduleStats[q.module] = { total: 0, correct: 0 };
+                }
+                moduleStats[q.module].total++;
+            });
+        }
+        function startExam(e) {
+            e.preventDefault();
+            studentName = document.getElementById("student-name").value.trim();
+            studentCareer = document.getElementById("student-career").value;
+            if (!studentName || !studentCareer) return;
+            document.getElementById("hdr-student-name").textContent = studentName;
+            document.getElementById("hdr-student-career").textContent = studentCareer;
+            document.getElementById("registration-screen").classList.add("hidden");
+            document.getElementById("exam-screen").classList.remove("hidden");
+            initStats();
+            initBadges();
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+            loadQuestion();
+        }
+        function initBadges() {
+            document.getElementById("correct-badge").textContent = `✓ 0/${questions.length}`;
+            document.getElementById("error-badge").textContent = `✗ 0/${questions.length}`;
+        }
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+            const secs = String(elapsed % 60).padStart(2, '0');
+            document.getElementById("timer-badge").textContent = `⏱️ ${mins}:${secs}`;
+        }
+        function loadQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById("q-module").textContent = q.module;
+            const tagEl = document.getElementById("q-tag");
+            tagEl.textContent = q.tag;
+            tagEl.className = `q-tag ${q.tag.toLowerCase()}`;
+            document.getElementById("q-text").textContent = `${currentIdx + 1}. ${q.text}`;
+            document.getElementById("progress-badge").textContent = `${currentIdx + 1} / ${questions.length}`;
+            const optionsList = document.getElementById("options-list");
+            optionsList.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(idx);
+                optionsList.appendChild(btn);
+            });
+            const fbBox = document.getElementById("feedback-box");
+            fbBox.className = "feedback-box";
+            fbBox.style.display = "none";
+            document.getElementById("top-btn-next").disabled = true;
+            document.getElementById("btn-next").disabled = true;
+            if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-next").classList.add("hidden");
+                document.getElementById("top-btn-finish").classList.remove("hidden");
+                document.getElementById("top-btn-finish").disabled = true;
+                document.getElementById("btn-next").classList.add("hidden");
+                document.getElementById("btn-finish").classList.remove("hidden");
+                document.getElementById("btn-finish").disabled = true;
+            } else {
+                document.getElementById("top-btn-next").classList.remove("hidden");
+                document.getElementById("top-btn-finish").classList.add("hidden");
+                document.getElementById("btn-next").classList.remove("hidden");
+                document.getElementById("btn-finish").classList.add("hidden");
+            }
+        }
+        function selectOption(selectedIdx) {
+            const q = questions[currentIdx];
+            const options = document.querySelectorAll(".option-btn");
+            options.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.classList.add("correct");
+                } else if (idx === selectedIdx && selectedIdx !== q.correct) {
+                    btn.classList.add("incorrect");
+                }
+            });
+            const fbBox = document.getElementById("feedback-box");
+            const fbTitle = document.getElementById("fb-title");
+            const fbText = document.getElementById("fb-text");
+            if (selectedIdx === q.correct) {
+                score++;
+                moduleStats[q.module].correct++;
+                fbBox.className = "feedback-box show correct-fb";
+                fbTitle.innerHTML = "✓ ¡Respuesta Correcta!";
+            } else {
+                errors++;
+                fbBox.className = "feedback-box show incorrect-fb";
+                fbTitle.innerHTML = "✗ Respuesta Incorrecta";
+            }
+            fbBox.style.display = "block";
+            fbText.innerHTML = `<strong>Fundamento clínico:</strong> ${q.fb}`;
+            document.getElementById("correct-badge").textContent = `✓ ${score}/${questions.length}`;
+            document.getElementById("error-badge").textContent = `✗ ${errors}/${questions.length}`;
+            if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-finish").disabled = false;
+                document.getElementById("btn-finish").disabled = false;
+            } else {
+                document.getElementById("top-btn-next").disabled = false;
+                document.getElementById("btn-next").disabled = false;
+            }
+        }
+        function nextQuestion() {
+            currentIdx++;
+            loadQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function finishExam() {
+            clearInterval(timerInterval);
+            localStorage.setItem("exam_completed_tsum_urgencias", "true");
+            document.getElementById("exam-screen").classList.add("hidden");
+            document.getElementById("results-screen").classList.remove("hidden");
+            document.getElementById("res-student-info").textContent = `${studentName} | ${studentCareer}`;
+            
+            const finalScore = (score / questions.length) * 10;
+            document.getElementById("res-score-val").textContent = finalScore.toFixed(1);
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+            document.getElementById("res-time-summary").textContent = `Tiempo total empleado: ${mins} min ${secs} seg`;
+            const fbSummary = document.getElementById("res-feedback-summary");
+            if (finalScore >= 8.0) {
+                fbSummary.textContent = "¡Excelente desempeño! Demuestra un sólido dominio prehospitalario.";
+            } else if (finalScore >= 6.0) {
+                fbSummary.textContent = "Aprobado con observaciones. Se sugiere reforzar los fundamentos clínicos.";
+            } else {
+                fbSummary.textContent = "Calificación no aprobatoria. Es necesario repasar los módulos de urgencias.";
+            }
+            const breakdownContainer = document.getElementById("module-breakdown");
+            for (const [mod, data] of Object.entries(moduleStats)) {
+                const percentage = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+                const modItem = document.createElement("div");
+                modItem.className = "module-item";
+                modItem.innerHTML = `
+                    <div class="module-info">
+                        <span>${mod}</span>
+                        <span>${data.correct}/${data.total} (${percentage}%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percentage}%;"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(modItem);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function requestFacultyReset() {
+            const password = prompt("Ingrese la clave docente para reiniciar la evaluación:");
+            if (password === "DOCENTE2026") {
+                localStorage.removeItem("exam_completed_tsum_urgencias");
+                alert("Acceso autorizado. Reiniciando evaluación.");
+                location.reload();
+            } else if (password !== null) {
+                alert("Clave docente incorrecta. Acceso denegado.");
+            }
+        }
+    </script>
+</body>
+</html>
